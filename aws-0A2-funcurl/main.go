@@ -21,6 +21,12 @@ func Handler(ctx context.Context, req events.LambdaFunctionURLRequest) (events.L
 	// Log request body
 	log.Printf("Body: %s", req.Body)
 
+	// b, _ := json.MarshalIndent(req, "", "  ")
+	// NO! will spread across several lines / log entries
+	b, _ := json.Marshal(req)
+	// AWS will automatically indent it in log watch
+	log.Println(string(b))
+
 	// Build response
 	responseBody, err := json.Marshal(map[string]interface{}{
 		"message": "Echo from Lambda Function URL",
