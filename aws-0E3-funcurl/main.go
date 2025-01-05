@@ -60,7 +60,7 @@ func main() {
 	})
 
 	// Wrap the ServeMux with the Lambda handler
-	lambdaHandler := lambdaurl.WrapHandler(mux.ServeHTTP)
+	lambdaHandler := lambdaurl.WrapHandler(mux)
 
 	// Start the Lambda handler
 	lambda.Start(lambdaHandler)

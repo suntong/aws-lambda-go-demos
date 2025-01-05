@@ -8,10 +8,10 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/aws/aws-lambda-go/lambdaurl"
-)
+	"github.com/aws/aws-lambda-go/lambda"
 
-// NB, not working. See https://github.com/aws/aws-lambda-go/issues/577
+	"github.com/suntong/lambdaurl"
+)
 
 /*
 
@@ -123,5 +123,6 @@ func main() {
 	log.Println("Server started at :8080")
 	// Using middleware
 	//log.Fatal(http.ListenAndServe(":8080", logger(mux)))
-	lambdaurl.Start(logger(mux))
+	lambdaHandler := lambdaurl.WrapHandler(logger(mux))
+	lambda.Start(lambdaHandler)
 }
